@@ -52,6 +52,7 @@ var db = function() {
       posts.splice(pos,1);
     }catch(e){
       winston.debug(e);
+      throw e;
     }
   }
 
@@ -108,7 +109,7 @@ exports.post = function (req, res) {
       post: foundPost
     });
   }catch(e){
-    console.debug(e);
+    winston.debug(e);
     res.json(false);
   }
 };
@@ -126,7 +127,7 @@ exports.editPost = function (req, res) {
     db.editPost(id, req.body.title, req.body.text);
     res.json(true);
   }catch(e){
-    console.debug(e);
+    winston.debug(e);
     res.json(false);
   }
 };
@@ -138,6 +139,7 @@ exports.deletePost = function (req, res) {
     db.deletePost(id);
     res.json(true);
   }catch(e){
+    winston.debug(e);
     res.json(false);
   }
 };
