@@ -1,18 +1,18 @@
 'use strict';
-/* global exports,log,console */
+/* global exports,require */
 
-//var log = require('winston');
+var winston = require('winston');
 
 // initialize our faux database
 var db = function() {
   var self = this, currentId = 0, posts = [];
 
   function findPost(id){
-    console.log("db.findPost:: Looking for post " + id);
+    winston.debug("db.findPost:: Looking for post " + id);
     for (var i = posts.length - 1; i >= 0; i--) {
       if(posts[i].id == id){
-        console.log("db.findPost:: Found post " + id);
-        console.log(posts[i]);
+        winston.debug("db.findPost:: Found post " + id);
+        winston.debug(posts[i]);
         return posts[i];
       }
     }
@@ -20,11 +20,12 @@ var db = function() {
   }
 
   function findPositionForPost(id){
-    console.log("db.findPositionForPost:: Looking for post " + id);
-    posts.forEach( function(post, i ){
-      if( post.id == id )
+    winston.debug("db.findPositionForPost:: Looking for post " + id);
+    for (var i = posts.length - 1; i >= 0; i--) {
+      if(posts[i].id == id){
         return i;
-    });
+      }
+    }
     throw new Error("Post " + id + "not found");
   }
 
@@ -44,8 +45,14 @@ var db = function() {
   }
 
   function deletePost(id){
-    var pos = findPositionForPost(id);
-    posts.splice(pos,1);
+    winston.debug("db.deletePost:: Looking for post "+ id);
+    try{
+      var pos = findPositionForPost(id);
+      winston.debug("db.deletePost:: Found post "+ id + " at position "+ pos);
+      posts.splice(pos,1);
+    }catch(e){
+      winston.debug(e);
+    }
   }
 
    function editPost(id, newTitle, newText){
@@ -92,16 +99,16 @@ exports.posts = function (req, res) {
 
 exports.post = function (req, res) {
   var id = req.params.id, foundPost;
-  console.log("API-GetPost:: Looking for post " + id);
+  winston.debug("API-GetPost:: Looking for post " + id);
   try{
     foundPost = db.getPost(id);
-    console.log("API-GetPost:: Found post " + id);
-    console.log(foundPost);
+    winston.debug("API-GetPost:: Found post " + id);
+    winston.debug(foundPost);
     res.json({
       post: foundPost
     });
   }catch(e){
-    console.log(e);
+    console.debug(e);
     res.json(false);
   }
 };
@@ -119,7 +126,7 @@ exports.editPost = function (req, res) {
     db.editPost(id, req.body.title, req.body.text);
     res.json(true);
   }catch(e){
-    console.log(e);
+    console.debug(e);
     res.json(false);
   }
 };
