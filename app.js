@@ -5,11 +5,16 @@
 
 var express = require('express'),
   routes = require('./routes'),
-  api = require('./routes/api');
+  api = require('./routes/api'),
+  winston = require('winston');
 
 var app = module.exports = express();
 
 // Configuration
+
+winston.remove(winston.transports.Console);
+//winston.add(winston.transports.Console, { level : "error"  });
+winston.add(winston.transports.Console, { level : "debug"  });
 
 app.configure(function () {
   app.set('views', __dirname + '/views');
