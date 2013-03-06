@@ -6,12 +6,20 @@ var winston = require('winston');
 // initialize our faux database
 var currentId = 0, posts = [];
 
+function toStringPost(post){
+  var string= "{\n";
+  string += "id: " + post.id + "\n";
+  string += "title: " + post.title + "\n";
+  string += "text: " + post.text + "\n}";
+  return string;
+}
+
 function findPost(id){
   winston.debug("db.findPost:: Looking for post " + id);
   for (var i = posts.length - 1; i >= 0; i--) {
     if(posts[i].id == id){
       winston.debug("db.findPost:: Found post " + id);
-      winston.debug(posts[i]);
+      winston.debug(toStringPost(posts[i]));
       return posts[i];
     }
   }
