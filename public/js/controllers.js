@@ -2,6 +2,8 @@
 
 /* Controllers */
 
+
+
 function IndexCtrl($scope, $http) {
   $http.get('/api/v1/posts').
     success(function(data, status, headers, config) {
@@ -18,12 +20,19 @@ function AddPostCtrl($scope, $http, $location) {
       });
   };
 }
-
+/*
 function ReadPostCtrl($scope, $http, $routeParams) {
   $http.get('/api/v1/post/' + $routeParams.id).
     success(function(data) {
       $scope.post = data.post;
     });
+}
+*/
+
+function ReadPostCtrl($scope, $routeParams, Posts) {
+  Posts.get({id:$routeParams.id}, function(resource){
+    $scope.post  = resource.post;
+  });
 }
 
 function EditPostCtrl($scope, $http, $location, $routeParams) {

@@ -14,7 +14,7 @@ exports.posts = function (req, res) {
   });
 };
 
-exports.post = function (req, res) {
+exports.getPost = function (req, res) {
   var id = req.params.id, foundPost;
   winston.debug("API-GetPost:: Looking for post " + id);
   try{
