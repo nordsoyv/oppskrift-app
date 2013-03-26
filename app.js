@@ -47,7 +47,7 @@ app.post('/api/v1/post', api.addPost);
 app.put('/api/v1/post/:id', api.editPost);
 app.delete('/api/v1/post/:id', api.deletePost);
 
-app.get('/api/v2/posts', api.posts);
+app.get('/api/v2/post/all', api.posts);
 
 app.get('/api/v2/post/:id', api.getPost);
 app.post('/api/v2/post', api.addPost);
