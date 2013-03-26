@@ -20,9 +20,7 @@ exports.getPost = function (req, res) {
   try{
     foundPost = db.getPost(id);
     winston.debug("API-GetPost:: Found post " + id);
-    res.json({
-      post: foundPost
-    });
+    res.json(foundPost);
   }catch(e){
     winston.debug(e);
     res.json(false);

@@ -19,9 +19,7 @@ function AddPostCtrl($scope, $http, $location) {
 }
 
 function ReadPostCtrl($scope, $routeParams, Posts) {
-  Posts.get({id:$routeParams.id}, function(resource){
-    $scope.post  = resource.post;
-  });
+  $scope.post = Posts.get({id:$routeParams.id});
 }
 
 function EditPostCtrl($scope, $http, $location, $routeParams) {
