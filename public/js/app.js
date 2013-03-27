@@ -1,17 +1,8 @@
 'use strict';
 /*global angular, IndexCtrl,AddPostCtrl,ReadPostCtrl ,EditPostCtrl, DeletePostCtrl, $resource*/
 
-/*
-var Post = $resource('/api/v2/post/:id');
-
-var post1 = new Post();
-post1.title = 'TEST';
-post1.text = 'TESTBODY';
-post1.$save();
-*/
-
 // Declare app level module which depends on filters, and services
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
+angular.module('OppskriftApp', ['OppskriftApp.filters', 'OppskriftApp.services', 'OppskriftApp.directives']).
   config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {

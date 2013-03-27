@@ -9,10 +9,9 @@
 
 
 
-angular.module('myApp.services', ['ngResource']).
+angular.module('OppskriftApp.services', ['ngResource']).
     factory('Posts', function($resource){
   return $resource('/api/v2/post/:id', {}, {
    query: {method:'GET', params:{id:'all'}, isArray:true}
-   /*update: {method: 'PUT'}*/
   });
 });
