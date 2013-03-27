@@ -8,13 +8,14 @@ function IndexCtrl($scope, Posts) {
   $scope.posts = Posts.query();
 }
 
-function AddPostCtrl($scope, $http, $location) {
+function AddPostCtrl($scope, Posts, $location) {
   $scope.form = {};
   $scope.submitPost = function () {
-    $http.post('/api/v1/post', $scope.form).
-      success(function(data) {
-        $location.path('/');
-      });
+    var newPost = new Posts();
+    newPost.text = $scope.form.text;
+    newPost.title = $scope.form.title;
+    newPost.$save();
+    $location.path('/');
   };
 }
 
