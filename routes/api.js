@@ -30,12 +30,14 @@ exports.getPost = function (req, res) {
 // POST
 exports.addPost = function (req, res) {
   var savedPost = db.addPost(req.body.title, req.body.text);
+  winston.debug("API-AddPost:: Adding post " + req.body.title);
   res.json(savedPost);
 };
 
 // PUT
 exports.editPost = function (req, res) {
   var id = req.params.id;
+  winston.debug("API-EditPost:: Looking for post " + id);
   try{
     db.editPost(id, req.body.title, req.body.text);
     res.json(true);
@@ -48,6 +50,7 @@ exports.editPost = function (req, res) {
 // DELETE
 exports.deletePost = function (req, res) {
   var id = req.params.id;
+  winston.debug("API-DeletePost:: Looking for post " + id);
   try{
     db.deletePost(id);
     res.json(true);

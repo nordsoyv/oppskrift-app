@@ -23,32 +23,20 @@ function ReadPostCtrl($scope, $routeParams, Posts) {
   $scope.post = Posts.get({id:$routeParams.id});
 }
 
-function EditPostCtrl($scope, $http, $location, $routeParams) {
-  $scope.form = {};
-  $http.get('/api/v1/post/' + $routeParams.id).
-    success(function(data) {
-      $scope.form = data.post;
-    });
+function EditPostCtrl($scope, Posts, $location, $routeParams) {
+  $scope.form = Posts.get({id:$routeParams.id});
 
   $scope.editPost = function () {
-    $http.put('/api/v1/post/' + $routeParams.id, $scope.form).
-      success(function(data) {
-        $location.url('/readPost/' + $routeParams.id);
-      });
+    $scope.form.$save({id:$routeParams.id});
+    $location.url('/readPost/' + $routeParams.id);
   };
 }
 
-function DeletePostCtrl($scope, $http, $location, $routeParams) {
-  $http.get('/api/v1/post/' + $routeParams.id).
-    success(function(data) {
-      $scope.post = data.post;
-    });
-
+function DeletePostCtrl($scope, Posts, $location, $routeParams) {
+  $scope.post = Posts.get({id:$routeParams.id});
   $scope.deletePost = function () {
-    $http.delete('/api/v1/post/' + $routeParams.id).
-      success(function(data) {
-        $location.url('/');
-      });
+    $scope.post.$delete({id:$routeParams.id});
+    $location.url('/');
   };
 
   $scope.home = function () {

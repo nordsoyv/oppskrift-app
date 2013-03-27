@@ -18,8 +18,8 @@ function findPost(id){
   winston.debug("db.findPost:: Looking for post " + id);
   for (var i = posts.length - 1; i >= 0; i--) {
     if(posts[i].id == id){
-      winston.debug("db.findPost:: Found post " + id);
-      winston.debug(toStringPost(posts[i]));
+      //winston.debug("db.findPost:: Found post " + id);
+      //winston.debug(toStringPost(posts[i]));
       return posts[i];
     }
   }
