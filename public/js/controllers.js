@@ -30,6 +30,14 @@ function EditPostCtrl($scope, Posts, $location, $routeParams) {
     $scope.form.$save({id:$routeParams.id});
     $location.url('/readPost/' + $routeParams.id);
   };
+
+  $scope.deleteStep = function(index){
+    $scope.form.steps.splice(index,1);
+  };
+
+  $scope.addStep = function(){
+    $scope.form.steps.push("");
+  }
 }
 
 function DeletePostCtrl($scope, Posts, $location, $routeParams) {

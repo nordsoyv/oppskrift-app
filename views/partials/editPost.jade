@@ -1,7 +1,19 @@
 h2 Rediger oppskrift
-label(for='title') Navn: 
-input(ng-model='form.title', name='title')
-p Fremgangsmåte:
-textarea(ng-model='form.text', cols='50', rows='15')
-p
-  button(ng-click='editPost()', class='btn') Lagre
+div.row 
+    label(for='title') Navn: 
+    input(ng-model='form.title', name='title')
+div.row Fremgangsmåte:
+    div(ng-repeat='step in form.steps')
+        div.row
+            div.span5
+                textarea(ng-model='step', class="stepinput")
+            div.span1
+                button.fui-cross-16.btn(ng-click='deleteStep($index)')
+    div.row
+        div.span5
+            
+div.row
+    div.span2
+        button.btn(ng-click='addStep()') Nytt steg
+    div.span2.offset2
+        button(ng-click='editPost()', class='btn') Lagre

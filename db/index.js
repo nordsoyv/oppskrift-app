@@ -36,12 +36,13 @@ function findPositionForPost(id){
   throw new Error("Post " + id + "not found");
 }
 
- exports.addPost = function(title,text){
+ exports.addPost = function(title,text, steps){
   var currId = currentId++;
   var post = {
     id : currId,
     title : title,
-    text : text
+    text : text,
+    steps :  steps
   };
   posts.push(post);
   return post;
@@ -63,10 +64,11 @@ exports.deletePost = function(id){
   }
 };
 
- exports.editPost = function(id, newTitle, newText){
+ exports.editPost = function(id, newTitle, newText, steps){
   var post = findPost(id);
   post.title = newTitle;
   post.text = newText;
+  post.steps =  steps;
   return post;
 };
 
@@ -83,5 +85,5 @@ exports.getAllPosts = function(){
 };
 
 //base data
-exports.addPost("Lorem ipsum","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." );
-exports.addPost("Sed egestas", "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.");
+exports.addPost("Lorem ipsum","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." , ["nr1","nr2"]);
+exports.addPost("Sed egestas", "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.", ["nr3","nr4"]);
