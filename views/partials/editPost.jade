@@ -2,11 +2,14 @@ h2 Rediger oppskrift
 div.row 
     label(for='title') Navn: 
     input(ng-model='form.title', name='title')
+div.row
+    label(for='description') Beskrivelse:
+    textarea(ng-model='form.description', name='description')
 div.row Fremgangsmåte:
     div(ng-repeat='step in form.steps')
         div.row
             div.span5
-                textarea(ng-model='step', class="stepinput")
+                textarea.stepinput(ng-model='step.text')
             div.span1
                 button.fui-cross-16.btn(ng-click='deleteStep($index)')
     div.row
