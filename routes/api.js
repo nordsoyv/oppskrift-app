@@ -29,7 +29,7 @@ exports.getPost = function (req, res) {
 
 // POST
 exports.addPost = function (req, res) {
-  var savedPost = db.addPost(req.body.title, req.body.text);
+  var savedPost = db.addPost(req.body);
   winston.debug("API-AddPost:: Adding post " + req.body.title);
   res.json(savedPost);
 };
@@ -39,7 +39,7 @@ exports.editPost = function (req, res) {
   var id = req.params.id;
   winston.debug("API-EditPost:: Looking for post " + id);
   try{
-    db.editPost(id, req.body.title, req.body.text);
+    db.editPost(id, req.body);
     res.json(true);
   }catch(e){
     winston.debug(e);

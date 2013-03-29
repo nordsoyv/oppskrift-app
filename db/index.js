@@ -36,14 +36,15 @@ function findPositionForPost(id){
   throw new Error("Post " + id + "not found");
 }
 
- exports.addPost = function(title,text, steps){
+ exports.addPost = function(post){
   var currId = currentId++;
-  var post = {
+  post.id = currId;
+/*  var post = {
     id : currId,
     title : title,
     text : text,
     steps :  steps
-  };
+  }; */
   posts.push(post);
   return post;
 };
@@ -64,12 +65,14 @@ exports.deletePost = function(id){
   }
 };
 
- exports.editPost = function(id, newTitle, newText, steps){
-  var post = findPost(id);
-  post.title = newTitle;
-  post.text = newText;
-  post.steps =  steps;
-  return post;
+ exports.editPost = function(id, post){
+  var pos = findPositionForPost(id);
+  posts[pos] = post;
+ /* var dbPost = findPost(id);
+  dbPost.title = newTitle;
+  dbPost.text = newText;
+  dbPost.steps =  steps;*/
+  return posts[pos];
 };
 
 exports.getAllPosts = function(){
@@ -85,5 +88,18 @@ exports.getAllPosts = function(){
 };
 
 //base data
-exports.addPost("Lorem ipsum","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." , ["nr1","nr2"]);
-exports.addPost("Sed egestas", "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.", ["nr3","nr4"]);
+
+var post1 = {
+  title : "Lorem ipsum",
+  text : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  steps : ["nr1","nr2"]
+};
+
+var post2 = {
+  title : "Sed egestas",
+  text : "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.",
+  steps:  ["nr3","nr4"]
+};
+
+exports.addPost(post1);
+exports.addPost(post2);
