@@ -39,12 +39,6 @@ function findPositionForPost(id){
  exports.addPost = function(post){
   var currId = currentId++;
   post.id = currId;
-/*  var post = {
-    id : currId,
-    title : title,
-    text : text,
-    steps :  steps
-  }; */
   posts.push(post);
   return post;
 };
@@ -68,10 +62,6 @@ exports.deletePost = function(id){
  exports.editPost = function(id, post){
   var pos = findPositionForPost(id);
   posts[pos] = post;
- /* var dbPost = findPost(id);
-  dbPost.title = newTitle;
-  dbPost.text = newText;
-  dbPost.steps =  steps;*/
   return posts[pos];
 };
 
