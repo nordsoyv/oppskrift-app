@@ -9,14 +9,34 @@ function IndexCtrl($scope, Posts) {
 }
 
 function AddPostCtrl($scope, Posts, $location) {
-  $scope.form = {};
+  $scope.form = {steps:[],
+                ingredients :[]};
   $scope.submitPost = function () {
     var newPost = new Posts();
-    newPost.text = $scope.form.text;
+    newPost.description = $scope.form.description;
     newPost.title = $scope.form.title;
+    newPost.steps = $scope.form.steps;
+    newPost.ingredients = $scope.form.ingredients;
     newPost.$save();
     $location.path('/');
   };
+
+  $scope.deleteStep = function(index){
+    $scope.form.steps.splice(index,1);
+  };
+
+  $scope.addStep = function(){
+    $scope.form.steps.push({});
+  };
+
+  $scope.deleteIngredient = function(index){
+    $scope.form.ingredients.splice(index,1);
+  };
+
+  $scope.addIngredient = function(){
+    $scope.form.ingredients.push({amount:"",name:""});
+  };
+
 }
 
 function ReadPostCtrl($scope, $routeParams, Posts) {
