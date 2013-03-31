@@ -36,8 +36,17 @@ function EditPostCtrl($scope, Posts, $location, $routeParams) {
   };
 
   $scope.addStep = function(){
-    $scope.form.steps.push("");
-  }
+    $scope.form.steps.push({});
+  };
+
+  $scope.deleteIngredient = function(index){
+    $scope.form.ingredients.splice(index,1);
+  };
+
+  $scope.addIngredient = function(){
+    $scope.form.ingredients.push({amount:"",name:""});
+  };
+
 }
 
 function DeletePostCtrl($scope, Posts, $location, $routeParams) {

@@ -34,3 +34,11 @@
 .stepinput{
   width: 100%;
 }
+
+.ingredientamountinput{
+  width: 50px;
+}
+
+.ingredientnameinput{
+  width: 200px;
+}

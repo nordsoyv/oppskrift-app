@@ -92,13 +92,15 @@ exports.getAllPosts = function(){
 var post1 = {
   title : "Lorem ipsum",
   text : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  steps : [{text:"nr1"},{text:"nr2"}]
+  steps : [{text:"nr1"},{text:"nr2"}],
+  ingredients : [ {amount:"1g", name:"krydder" },  {amount:"100g",name:"mel"  }]
 };
 
 var post2 = {
   title : "Sed egestas",
   text : "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.",
-  steps:  [{text:"nr3"},{text:"nr4"}]
+  steps:  [{text:"nr3"},{text:"nr4"}],
+  ingredients : [ {amount:"1g", name:"krydder" },  {amount:"100g",name:"mel"  }]
 };
 
 exports.addPost(post1);

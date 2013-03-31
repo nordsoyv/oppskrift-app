@@ -5,18 +5,34 @@ div.row
 div.row
     label(for='description') Beskrivelse:
     textarea(ng-model='form.description', name='description')
-div.row Fremgangsmåte:
-    div(ng-repeat='step in form.steps')
-        div.row
-            div.span5
-                textarea.stepinput(ng-model='step.text')
-            div.span1
-                button.fui-cross-16.btn(ng-click='deleteStep($index)')
-    div.row
-        div.span5
-            
+div.row 
+    h4 Fremgangsmåte:
 div.row
-    div.span2
-        button.btn(ng-click='addStep()') Nytt steg
+    div.span6
+        div(ng-repeat='step in form.steps')
+            div.row
+                div.span5
+                    textarea.stepinput(ng-model='step.text')
+                div.span1
+                    button.fui-cross-16.btn(ng-click='deleteStep($index)')
+        div.row
+            div.span2
+                button.btn(ng-click='addStep()') Nytt steg
+    div.span6
+        div(ng-repeat='ingredient in form.ingredients')
+            div.row
+                .span1
+                    input.ingredientamountinput(ng-model='ingredient.amount')
+                .span2.offset1
+                    input.ingredientnameinput(ng-model='ingredient.name')
+                .span1.offset1
+                    button.fui-cross-16.btn(ng-click='deleteIngredient($index)')
+        br
+        div.row
+            div.span2
+                button.btn(ng-click='addIngredient()') Ny ingridiens
+br
+
+div.row
     div.span2.offset2
         button(ng-click='editPost()', class='btn') Lagre
