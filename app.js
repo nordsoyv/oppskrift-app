@@ -38,6 +38,8 @@ app.configure('production', function (){
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
+
+
 // JSON API
 
 app.get('/api/v1/posts', api.posts);

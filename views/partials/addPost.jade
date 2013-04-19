@@ -1,31 +1,35 @@
 h2 Legg inn en ny oppskrift
-div.row 
-    label(for='title') Navn: 
-    input(ng-model='form.title', name='title')
 div.row
-    label(for='description') Beskrivelse:
-    textarea(ng-model='form.description', name='description')
-div.row 
-    h4 Fremgangsmåte:
+    .span2
+        label(for='title') Navn:
+    .span2
+        input(ng-model='form.title', name='title')
 div.row
-    div.span6
+    .span2
+        label(for='description') Beskrivelse:
+    .span2
+        textarea(ng-model='form.description', name='description')
+div.row
+    div.span4
+        h4 Fremgangsmåte:
+div.row
+    div.span8
         div(ng-repeat='step in form.steps')
             div.row
                 div.span5
                     textarea.stepinput(ng-model='step.text')
-                div.span1
                     button.fui-cross-16.btn(ng-click='deleteStep($index)')
         div.row
-            div.span2
+            div.span2.offset1
                 button.btn(ng-click='addStep()') Nytt steg
-    div.span6
+    div.span4
         div(ng-repeat='ingredient in form.ingredients')
-            div.row
+            div.row.ingridient
                 .span1
                     input.ingredientamountinput(ng-model='ingredient.amount')
-                .span2.offset1
+                .span2
                     input.ingredientnameinput(ng-model='ingredient.name')
-                .span1.offset1
+                .span1
                     button.fui-cross-16.btn(ng-click='deleteIngredient($index)')
         br
         div.row

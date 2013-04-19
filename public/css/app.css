@@ -32,7 +32,12 @@
 */
 
 .stepinput{
-  width: 100%;
+  width: 85%;
+    vertical-align: top;
+}
+
+.ingridient {
+
 }
 
 .ingredientamountinput{
@@ -40,5 +45,5 @@
 }
 
 .ingredientnameinput{
-  width: 200px;
+  width: 150px;
 }
