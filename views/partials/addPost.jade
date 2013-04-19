@@ -2,41 +2,45 @@ h2 Legg inn en ny oppskrift
 div.row
     .span2
         label(for='title') Navn:
-    .span2
-        input(ng-model='form.title', name='title')
+    .span4
+        input(ng-model='form.title', name='title', type='text')
 div.row
     .span2
         label(for='description') Beskrivelse:
-    .span2
+    .span4
         textarea(ng-model='form.description', name='description')
 div.row
-    div.span4
+    div.span8
         h4 Fremgangsmåte:
+    .span1
+        h4 Mengde:
+    .span2
+        h4 Navn:
 div.row
     div.span8
         div(ng-repeat='step in form.steps')
             div.row
-                div.span5
+                div.span7
                     textarea.stepinput(ng-model='step.text')
                     button.fui-cross-16.btn(ng-click='deleteStep($index)')
         div.row
-            div.span2.offset1
+            div.span2
                 button.btn(ng-click='addStep()') Nytt steg
     div.span4
         div(ng-repeat='ingredient in form.ingredients')
-            div.row.ingridient
+            div.row.ingredient
                 .span1
-                    input.ingredientamountinput(ng-model='ingredient.amount')
+                    input.amount(ng-model='ingredient.amount', type='text' )
                 .span2
-                    input.ingredientnameinput(ng-model='ingredient.name')
+                    input.name(ng-model='ingredient.name', type='text')
                 .span1
                     button.fui-cross-16.btn(ng-click='deleteIngredient($index)')
         br
         div.row
             div.span2
-                button.btn(ng-click='addIngredient()') Ny ingridiens
+                button.btn(ng-click='addIngredient()') Ny ingrediens
 br
 
 div.row
-    div.span2.offset2
-        button(ng-click='submitPost()', class='btn') Lagre
+    div.span2
+        button(ng-click='submitPost()', class='btn') Lagre oppskrift

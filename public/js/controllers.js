@@ -9,8 +9,8 @@ function IndexCtrl($scope, Posts) {
 }
 
 function AddPostCtrl($scope, Posts, $location) {
-  $scope.form = {steps:[],
-                ingredients :[]};
+  $scope.form = {steps:[{}],
+                ingredients :[{}]};
   $scope.submitPost = function () {
     var newPost = new Posts();
     newPost.description = $scope.form.description;

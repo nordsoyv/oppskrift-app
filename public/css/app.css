@@ -31,19 +31,21 @@
 
 */
 
-.stepinput{
-  width: 85%;
+.stepinput {
+    width: 80%;
     vertical-align: top;
+    margin-right: 5px;
 }
 
-.ingridient {
+.ingredient {
+    margin-bottom: 5px;
 
 }
 
-.ingredientamountinput{
-  width: 50px;
+.ingredient .amount {
+    width: 50px;
 }
 
-.ingredientnameinput{
-  width: 150px;
+.ingredient .name {
+    width: 140px;
 }
