@@ -80,17 +80,17 @@ exports.getAllPosts = function(){
 //base data
 
 var post1 = {
-  title : "Lorem ipsum",
-  description : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  steps : [{text:"nr1"},{text:"nr2"}],
+  title : "Oppskrift 1",
+  description : "Test oppskrift nr 1",
+  steps : [{text:"Steg 1"},{text:"Steg 2"}],
   ingredients : [ {amount:"1g", name:"krydder" },  {amount:"100g",name:"mel"  }]
 };
 
 var post2 = {
-  title : "Sed egestas",
-  description : "Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus.",
-  steps:  [{text:"nr3"},{text:"nr4"}],
-  ingredients : [ {amount:"1g", name:"krydder" },  {amount:"100g",name:"mel"  }]
+  title : "Oppskrift nr 2",
+  description : "Test oppskift nr 2",
+  steps:  [{text:"Steg nr 1"},{text:"Steg nr 2"}],
+  ingredients : [ {amount:"10g", name:"salt" },  {amount:"400g",name:"kjøttdeig"  }]
 };
 
 exports.addPost(post1);
