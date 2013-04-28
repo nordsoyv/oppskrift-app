@@ -9,9 +9,10 @@ var winston = require('winston');
 
 exports.posts = function (req, res) {
   winston.debug("API-Posts:: Looking for all posts ");
-  var posts = db.getAllPosts();
-  winston.debug("API-Posts:: Found " + posts.length);
-  res.json(posts);
+  db.getAllPosts(function(posts){
+      winston.debug("API-Posts:: Found " + posts.length);
+      res.json(posts);
+  });
 };
 
 exports.getPost = function (req, res) {

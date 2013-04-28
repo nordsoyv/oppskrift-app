@@ -63,6 +63,6 @@ app.get('*', routes.index);
 
 // Start server
 
-app.listen(3000, function(){
+app.listen(3000, function(err){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
