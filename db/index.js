@@ -3,7 +3,8 @@
 var winston = require('winston');
 var MongoClient = require('mongodb').MongoClient;
 var oppskrifterDb,
-    oppskrifterCollection;
+    oppskrifterCollection,
+    countersCollection;
 
 MongoClient.connect("mongodb://localhost:27017/oppskrifter", function (err, db) {
     if (!err) {
@@ -19,46 +20,36 @@ MongoClient.connect("mongodb://localhost:27017/oppskrifter", function (err, db) 
         oppskrifterCollection = collection;
     });
 
+    db.createCollection("counters", function(err, collection){
+        if (!err) {
+            console.log("Found counters collection");
+        }
+        countersCollection = collection;
+    });
+
 });
 
 
-// initialize our faux database
-var currentId = 0, posts = [];
-
-function toStringPost(post) {
-    var string = "{\n";
-    string += "id: " + post._id + "\n";
-    string += "title: " + post.title + "\n";
-    string += "text: " + post.text + "\n}";
-    return string;
+function getNextSequence(name, callback){
+    countersCollection.findAndModify( {_id:name}, [], { $inc: { seq: 1 } } , function(err, doc){
+        callback(doc.seq)
+    });
 }
 
-function findPost(id) {
-    winston.debug("db.findPost:: Looking for post " + id);
-    for (var i = posts.length - 1; i >= 0; i--) {
-        if (posts[i].id == id) {
-            //winston.debug("db.findPost:: Found post " + id);
-            //winston.debug(toStringPost(posts[i]));
-            return posts[i];
-        }
-    }
-    throw new Error("Post " + id + "not found");
+function getNextGlobalId(callback){
+    return getNextSequence("global",callback);
 }
 
-function findPositionForPost(id) {
-    winston.debug("db.findPositionForPost:: Looking for post " + id);
-    for (var i = posts.length - 1; i >= 0; i--) {
-        if (posts[i].id == id) {
-            return i;
-        }
-    }
-    throw new Error("Post " + id + "not found");
-}
 
 exports.addPost = function (post) {
-    post.id = currentId++;
-    posts.push(post);
-    return post;
+    getNextGlobalId(function(seq){
+        post._id  = seq;
+        oppskrifterCollection.insert(  post, function(err, doc){
+            if(err){
+                console.log(err);
+            }
+        });
+    });
 };
 
 exports.getPost = function (idToFind, callback) {
