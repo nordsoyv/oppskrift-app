@@ -18,14 +18,10 @@ exports.posts = function (req, res) {
 exports.getPost = function (req, res) {
   var id = req.params.id, foundPost;
   winston.debug("API-GetPost:: Looking for post " + id);
-  try{
-    foundPost = db.getPost(id);
-    winston.debug("API-GetPost:: Found post " + id);
-    res.json(foundPost);
-  }catch(e){
-    winston.debug(e);
-    res.json(false);
-  }
+    foundPost = db.getPost(id, function(foundPost){
+        //winston.debug("API-GetPost:: Found post " + foundPost._id);
+        res.json(foundPost);
+    });
 };
 
 // POST

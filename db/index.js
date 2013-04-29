@@ -61,20 +61,26 @@ exports.addPost = function (post) {
     return post;
 };
 
-exports.getPost = function (id) {
-    return findPost(id);
+exports.getPost = function (idToFind, callback) {
+    oppskrifterCollection.findOne({_id : parseInt(idToFind)}, function(err, doc){
+        if(err){
+           console.log(err);
+        }
+        callback(doc);
+    });
 };
 
-exports.deletePost = function (id) {
+exports.deletePost = function (id, callback) {
     winston.debug("db.deletePost:: Looking for post " + id);
-    try {
-        var pos = findPositionForPost(id);
-        winston.debug("db.deletePost:: Found post " + id + " at position " + pos);
-        posts.splice(pos, 1);
-    } catch (e) {
-        winston.debug(e);
-        throw e;
-    }
+//    oppskrifterCollection.remove( {_id : parseInt(idToFind)}, function(err, doc){
+//        if(err){
+//            console.log(err);
+//            callback(false);
+//            return;
+//        }
+//        callback(true);
+//    });
+
 };
 
 exports.editPost = function (id, post) {
@@ -82,18 +88,6 @@ exports.editPost = function (id, post) {
     posts[pos] = post;
     return posts[pos];
 };
-
-//exports.getAllPosts = function(){
-//  var returnPosts = [];
-//  posts.forEach(function (post, i) {
-//    returnPosts.push({
-//      id: post.id,
-//      title: post.title,
-//      text: post.description.substr(0, 50) + '...'
-//    });
-//  });
-//  return returnPosts;
-//};
 
 exports.getAllPosts = function (callback) {
     var posts = [];
