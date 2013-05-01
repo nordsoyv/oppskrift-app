@@ -22,8 +22,10 @@ function AddOppskriftCtrl($scope, Oppskrifter, $location) {
         newOppskrift.title = $scope.form.title;
         newOppskrift.steps = $scope.form.steps;
         newOppskrift.ingredients = $scope.form.ingredients;
-        newOppskrift.$save();
-        $location.path('/');
+        newOppskrift.$save(function(savedOppskrift, putResponseHeaders){
+            $location.path('/readOppskrift/' + savedOppskrift._id);
+        });
+
     };
 
     $scope.deleteStep = function (index) {
