@@ -7,7 +7,7 @@ var winston = require('winston');
 
 // GET
 
-exports.posts = function (req, res) {
+exports.oppskrifter = function (req, res) {
     winston.debug("API-Posts:: Looking for all posts ");
     db.getAllOppskrifter(function (oppskrifter) {
         winston.debug("API-Posts:: Found " + oppskrifter.length);
@@ -15,7 +15,7 @@ exports.posts = function (req, res) {
     });
 };
 
-exports.getPost = function (req, res) {
+exports.getOppskrift = function (req, res) {
     var id = req.params.id;
     winston.debug("API-GetPost:: Looking for post " + id);
     db.getOppskrift(id, function (oppskrift) {
@@ -24,7 +24,7 @@ exports.getPost = function (req, res) {
 };
 
 // POST
-exports.addPost = function (req, res) {
+exports.addOppskrift = function (req, res) {
     db.addOppskrift(req.body, function (success, oppskrift) {
         if (success)
             res.json(oppskrift);
@@ -37,7 +37,7 @@ exports.addPost = function (req, res) {
 };
 
 // PUT
-exports.editPost = function (req, res) {
+exports.updateOppskrift = function (req, res) {
     var id = req.params.id;
     winston.debug("API-EditPost:: Looking for post " + id);
     db.updateOppskrift(req.body, function (result) {
@@ -46,7 +46,7 @@ exports.editPost = function (req, res) {
 };
 
 // DELETE
-exports.deletePost = function (req, res) {
+exports.deleteOppskrift = function (req, res) {
     var id = req.params.id;
     winston.debug("API-DeletePost:: Looking for post " + id);
     db.deleteOppskrift(id, function(success){
