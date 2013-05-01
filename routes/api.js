@@ -35,13 +35,9 @@ exports.addPost = function (req, res) {
 exports.editPost = function (req, res) {
   var id = req.params.id;
   winston.debug("API-EditPost:: Looking for post " + id);
-  try{
-    db.editPost(id, req.body);
-    res.json(true);
-  }catch(e){
-    winston.debug(e);
-    res.json(false);
-  }
+  db.editPost(req.body, function(result){
+      res.json(result);
+  });
 };
 
 // DELETE

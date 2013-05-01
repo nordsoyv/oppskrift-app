@@ -74,10 +74,20 @@ exports.deletePost = function (id, callback) {
 
 };
 
-exports.editPost = function (id, post) {
-    var pos = findPositionForPost(id);
-    posts[pos] = post;
-    return posts[pos];
+exports.editPost = function (post, callback) {
+    oppskrifterCollection.save(post, {safe:true}, function (err, doc){
+        if(err){
+            console.log(err);
+            callback(false);
+            return;
+        }
+        if(doc === 1){
+            //update
+            callback(true);
+            return;
+        }
+        callback(true);
+    })
 };
 
 exports.getAllPosts = function (callback) {
