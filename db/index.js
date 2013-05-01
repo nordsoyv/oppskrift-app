@@ -1,97 +1,104 @@
 "use strict";
 /*globals require, exports */
 var winston = require('winston');
+var MongoClient = require('mongodb').MongoClient;
+var oppskrifterDb,
+    oppskrifterCollection,
+    countersCollection;
 
-
-// initialize our faux database
-var currentId = 0, posts = [];
-
-function toStringPost(post){
-  var string= "{\n";
-  string += "id: " + post.id + "\n";
-  string += "title: " + post.title + "\n";
-  string += "text: " + post.text + "\n}";
-  return string;
-}
-
-function findPost(id){
-  winston.debug("db.findPost:: Looking for post " + id);
-  for (var i = posts.length - 1; i >= 0; i--) {
-    if(posts[i].id == id){
-      //winston.debug("db.findPost:: Found post " + id);
-      //winston.debug(toStringPost(posts[i]));
-      return posts[i];
+MongoClient.connect("mongodb://localhost:27017/oppskrifter", function (err, db) {
+    if (!err) {
+        console.log("We are connected");
     }
-  }
-  throw new Error("Post " + id + "not found");
-}
 
-function findPositionForPost(id){
-  winston.debug("db.findPositionForPost:: Looking for post " + id);
-  for (var i = posts.length - 1; i >= 0; i--) {
-    if(posts[i].id == id){
-      return i;
-    }
-  }
-  throw new Error("Post " + id + "not found");
-}
+    oppskrifterDb = db;
 
- exports.addPost = function(post){
-  var currId = currentId++;
-  post.id = currId;
-  posts.push(post);
-  return post;
-};
-
-exports.getPost = function(id){
-  return findPost(id);
-};
-
-exports.deletePost = function(id){
-  winston.debug("db.deletePost:: Looking for post "+ id);
-  try{
-    var pos = findPositionForPost(id);
-    winston.debug("db.deletePost:: Found post "+ id + " at position "+ pos);
-    posts.splice(pos,1);
-  }catch(e){
-    winston.debug(e);
-    throw e;
-  }
-};
-
- exports.editPost = function(id, post){
-  var pos = findPositionForPost(id);
-  posts[pos] = post;
-  return posts[pos];
-};
-
-exports.getAllPosts = function(){
-  var returnPosts = [];
-  posts.forEach(function (post, i) {
-    returnPosts.push({
-      id: post.id,
-      title: post.title,
-      text: post.description.substr(0, 50) + '...'
+    db.createCollection("oppskrifter", function (err, collection) {
+        if (!err) {
+            console.log("Found oppskrifter collection");
+        }
+        oppskrifterCollection = collection;
     });
-  });
-  return returnPosts;
+
+    db.createCollection("counters", function(err, collection){
+        if (!err) {
+            console.log("Found counters collection");
+        }
+        countersCollection = collection;
+    });
+
+});
+
+
+function getNextSequence(name, callback){
+    countersCollection.findAndModify( {_id:name}, [], { $inc: { seq: 1 } } , function(err, doc){
+        callback(doc.seq)
+    });
+}
+
+function getNextGlobalId(callback){
+    return getNextSequence("global",callback);
+}
+
+
+exports.addPost = function (post, callback) {
+    getNextGlobalId(function(seq){
+        post._id  = seq;
+        oppskrifterCollection.insert(  post, function(err, doc){
+            if(err){
+                console.log(err);
+                callback(false, null);
+                return;
+            }
+            callback(true, doc);
+        });
+    });
 };
 
-//base data
-
-var post1 = {
-  title : "Oppskrift 1",
-  description : "Test oppskrift nr 1",
-  steps : [{text:"Steg 1"},{text:"Steg 2"}],
-  ingredients : [ {amount:"1g", name:"krydder" },  {amount:"100g",name:"mel"  }]
+exports.getPost = function (idToFind, callback) {
+    oppskrifterCollection.findOne({_id : parseInt(idToFind)}, function(err, doc){
+        if(err){
+           console.log(err);
+        }
+        callback(doc);
+    });
 };
 
-var post2 = {
-  title : "Oppskrift nr 2",
-  description : "Test oppskift nr 2",
-  steps:  [{text:"Steg nr 1"},{text:"Steg nr 2"}],
-  ingredients : [ {amount:"10g", name:"salt" },  {amount:"400g",name:"kjøttdeig"  }]
+exports.deletePost = function (id, callback) {
+    winston.debug("db.deletePost:: Looking for post " + id);
+    oppskrifterCollection.remove( {_id : parseInt(id)}, function(err, doc){
+        if(err){
+            console.log(err);
+            callback(false);
+            return;
+        }
+        callback(true);
+    });
+
 };
 
-exports.addPost(post1);
-exports.addPost(post2);
+exports.editPost = function (post, callback) {
+    oppskrifterCollection.save(post, {safe:true}, function (err, doc){
+        if(err){
+            console.log(err);
+            callback(false);
+            return;
+        }
+        if(doc === 1){
+            //update
+            callback(true);
+            return;
+        }
+        callback(true);
+    })
+};
+
+exports.getAllPosts = function (callback) {
+    var posts = [];
+    oppskrifterCollection.find({}).toArray(function (err, results) {
+        results.forEach(function (item) {
+            posts.push(item);
+        });
+        callback(posts);
+    });
+};
