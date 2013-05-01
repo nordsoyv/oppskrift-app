@@ -11,19 +11,19 @@ angular.module('OppskriftApp', ['OppskriftApp.filters', 'OppskriftApp.services',
       }).
       when('/addPost', {
         templateUrl: 'partials/addPost',
-        controller: AddPostCtrl
+        controller: AddOppskriftCtrl
       }).
       when('/readPost/:id', {
         templateUrl: 'partials/readPost',
-        controller: ReadPostCtrl
+        controller: ReadOppskriftCtrl
       }).
       when('/editPost/:id', {
         templateUrl: 'partials/editPost',
-        controller: EditPostCtrl
+        controller: EditOppskriftCtrl
       }).
       when('/deletePost/:id', {
         templateUrl: 'partials/deletePost',
-        controller: DeletePostCtrl
+        controller: DeleteOppskriftCtrl
       }).
       otherwise({
         redirectTo: '/'

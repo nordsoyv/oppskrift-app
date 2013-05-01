@@ -1,9 +1,9 @@
 p Det finnes {{posts.length}} oppskrifter
-div(ng-repeat='post in posts')
-  h3 {{post.title}}
-  div {{post.description}}
-  a(href='readPost/{{post._id}}') Detaljer
+div(ng-repeat='oppskrift in oppskrifter')
+  h3 {{oppskrift.title}}
+  div {{oppskrift.description}}
+  a(href='readPost/{{oppskrift._id}}') Detaljer
   |  - 
-  a(href='editPost/{{post._id}}') Rediger
+  a(href='editPost/{{oppskrift._id}}') Rediger
   |  - 
-  a(href='deletePost/{{post._id}}') Slett
+  a(href='deletePost/{{oppskrift._id}}') Slett

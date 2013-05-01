@@ -1,25 +1,25 @@
 .row
     .span4
-        h2 {{post.title}}
+        h2 {{oppskrift.title}}
 br
 .row
     .span4
         h4 Beskrivelse
 .row
     .span4
-        p {{post.description}}
+        p {{oppskrift.description}}
 br
 .row
     .span4
         h4 Ingredienser
 ul
-    li(ng-repeat='ingredient in post.ingredients')
+    li(ng-repeat='ingredient in oppskrift.ingredients')
         p {{ingredient.amount}} {{ingredient.name}}
 .row
     .span4
         h4 Fremgangsmåte
 ol
-    li(ng-repeat='step in post.steps')
+    li(ng-repeat='step in oppskrift.steps')
         p {{step.text}}
 
 

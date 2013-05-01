@@ -10,7 +10,7 @@
 
 
 angular.module('OppskriftApp.services', ['ngResource']).
-    factory('Posts', function($resource){
+    factory('Oppskrifter', function($resource){
   return $resource('/api/v2/oppskrifter/:id', {}, {
    query: {method:'GET', params:{id:'all'}, isArray:true}
   });
