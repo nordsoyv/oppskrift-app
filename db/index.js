@@ -41,13 +41,16 @@ function getNextGlobalId(callback){
 }
 
 
-exports.addPost = function (post) {
+exports.addPost = function (post, callback) {
     getNextGlobalId(function(seq){
         post._id  = seq;
         oppskrifterCollection.insert(  post, function(err, doc){
             if(err){
                 console.log(err);
+                callback(false, null);
+                return;
             }
+            callback(true, doc);
         });
     });
 };
@@ -63,14 +66,14 @@ exports.getPost = function (idToFind, callback) {
 
 exports.deletePost = function (id, callback) {
     winston.debug("db.deletePost:: Looking for post " + id);
-//    oppskrifterCollection.remove( {_id : parseInt(idToFind)}, function(err, doc){
-//        if(err){
-//            console.log(err);
-//            callback(false);
-//            return;
-//        }
-//        callback(true);
-//    });
+    oppskrifterCollection.remove( {_id : parseInt(id)}, function(err, doc){
+        if(err){
+            console.log(err);
+            callback(false);
+            return;
+        }
+        callback(true);
+    });
 
 };
 
