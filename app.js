@@ -41,12 +41,12 @@ app.get('/partials/:name', routes.partials);
 
 
 // JSON API
-app.get('/api/v2/post/all', api.oppskrifter);
+app.get('/api/v2/oppskrifter/all', api.oppskrifter);
 
-app.get('/api/v2/post/:id', api.getOppskrift);
-app.post('/api/v2/post', api.addOppskrift);
-app.post('/api/v2/post/:id', api.updateOppskrift);
-app.delete('/api/v2/post/:id', api.deleteOppskrift);
+app.get('/api/v2/oppskrifter/:id', api.getOppskrift);
+app.post('/api/v2/oppskrifter', api.addOppskrift);
+app.post('/api/v2/oppskrifter/:id', api.updateOppskrift);
+app.delete('/api/v2/oppskrifter/:id', api.deleteOppskrift);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
