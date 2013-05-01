@@ -9,25 +9,25 @@ var winston = require('winston');
 
 exports.posts = function (req, res) {
     winston.debug("API-Posts:: Looking for all posts ");
-    db.getAllPosts(function (posts) {
-        winston.debug("API-Posts:: Found " + posts.length);
-        res.json(posts);
+    db.getAllOppskrifter(function (oppskrifter) {
+        winston.debug("API-Posts:: Found " + oppskrifter.length);
+        res.json(oppskrifter);
     });
 };
 
 exports.getPost = function (req, res) {
     var id = req.params.id;
     winston.debug("API-GetPost:: Looking for post " + id);
-    db.getPost(id, function (post) {
-        res.json(post);
+    db.getOppskrift(id, function (oppskrift) {
+        res.json(oppskrift);
     });
 };
 
 // POST
 exports.addPost = function (req, res) {
-    db.addPost(req.body, function (success, post) {
+    db.addOppskrift(req.body, function (success, oppskrift) {
         if (success)
-            res.json(post);
+            res.json(oppskrift);
         else
             res.json(false);
 
@@ -40,7 +40,7 @@ exports.addPost = function (req, res) {
 exports.editPost = function (req, res) {
     var id = req.params.id;
     winston.debug("API-EditPost:: Looking for post " + id);
-    db.editPost(req.body, function (result) {
+    db.updateOppskrift(req.body, function (result) {
         res.json(result);
     });
 };
@@ -49,7 +49,7 @@ exports.editPost = function (req, res) {
 exports.deletePost = function (req, res) {
     var id = req.params.id;
     winston.debug("API-DeletePost:: Looking for post " + id);
-    db.deletePost(id, function(success){
+    db.deleteOppskrift(id, function(success){
         if(success)
             res.json(true);
         else

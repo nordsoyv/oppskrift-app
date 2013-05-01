@@ -41,10 +41,10 @@ function getNextGlobalId(callback){
 }
 
 
-exports.addPost = function (post, callback) {
+exports.addOppskrift = function (oppskrift, callback) {
     getNextGlobalId(function(seq){
-        post._id  = seq;
-        oppskrifterCollection.insert(  post, function(err, doc){
+        oppskrift._id  = seq;
+        oppskrifterCollection.insert(  oppskrift, function(err, doc){
             if(err){
                 console.log(err);
                 callback(false, null);
@@ -55,7 +55,7 @@ exports.addPost = function (post, callback) {
     });
 };
 
-exports.getPost = function (idToFind, callback) {
+exports.getOppskrift = function (idToFind, callback) {
     oppskrifterCollection.findOne({_id : parseInt(idToFind)}, function(err, doc){
         if(err){
            console.log(err);
@@ -64,9 +64,9 @@ exports.getPost = function (idToFind, callback) {
     });
 };
 
-exports.deletePost = function (id, callback) {
-    winston.debug("db.deletePost:: Looking for post " + id);
-    oppskrifterCollection.remove( {_id : parseInt(id)}, function(err, doc){
+exports.deleteOppskrift = function (id, callback) {
+    winston.debug("db.deletePost:: Looking for oppskrift " + id);
+    oppskrifterCollection.remove( {_id : parseInt(id)}, function(err, numRemoved){
         if(err){
             console.log(err);
             callback(false);
@@ -77,8 +77,8 @@ exports.deletePost = function (id, callback) {
 
 };
 
-exports.editPost = function (post, callback) {
-    oppskrifterCollection.save(post, {safe:true}, function (err, doc){
+exports.updateOppskrift = function (oppskrift, callback) {
+    oppskrifterCollection.save(oppskrift, {safe:true}, function (err, doc){
         if(err){
             console.log(err);
             callback(false);
@@ -93,12 +93,12 @@ exports.editPost = function (post, callback) {
     })
 };
 
-exports.getAllPosts = function (callback) {
-    var posts = [];
+exports.getAllOppskrifter = function (callback) {
+    var oppskrifter = [];
     oppskrifterCollection.find({}).toArray(function (err, results) {
         results.forEach(function (item) {
-            posts.push(item);
+            oppskrifter.push(item);
         });
-        callback(posts);
+        callback(oppskrifter);
     });
 };
