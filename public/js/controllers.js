@@ -49,7 +49,7 @@ function EditOppskriftCtrl($scope, Oppskrifter, $location, $routeParams) {
 
     $scope.editPost = function () {
         $scope.form.$save({id: $routeParams.id});
-        $location.url('/readPost/' + $routeParams.id);
+        $location.url('/readOppskrift/' + $routeParams.id);
     };
 
     $scope.deleteStep = function (index) {

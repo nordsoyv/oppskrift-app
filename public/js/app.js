@@ -9,20 +9,20 @@ angular.module('OppskriftApp', ['OppskriftApp.filters', 'OppskriftApp.services',
         templateUrl: 'partials/index',
         controller: IndexCtrl
       }).
-      when('/addPost', {
-        templateUrl: 'partials/addPost',
+      when('/addOppskrift', {
+        templateUrl: 'partials/addOppskrift',
         controller: AddOppskriftCtrl
       }).
-      when('/readPost/:id', {
-        templateUrl: 'partials/readPost',
+      when('/readOppskrift/:id', {
+        templateUrl: 'partials/readOppskrift',
         controller: ReadOppskriftCtrl
       }).
-      when('/editPost/:id', {
-        templateUrl: 'partials/editPost',
+      when('/editOppskrift/:id', {
+        templateUrl: 'partials/editOppskrift',
         controller: EditOppskriftCtrl
       }).
-      when('/deletePost/:id', {
-        templateUrl: 'partials/deletePost',
+      when('/deleteOppskrift/:id', {
+        templateUrl: 'partials/deleteOppskrift',
         controller: DeleteOppskriftCtrl
       }).
       otherwise({
