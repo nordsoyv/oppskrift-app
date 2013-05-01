@@ -27,25 +27,21 @@ function AddOppskriftCtrl($scope, Oppskrifter, $location) {
     };
 
     $scope.deleteStep = function (index) {
-        $scope.form.steps.splice(index, 1);
+        deleteStep($scope.form, index);
     };
 
     $scope.addStep = function () {
-        $scope.form.steps.push({});
+        addStep($scope.form);
     };
 
     $scope.deleteIngredient = function (index) {
-        $scope.form.ingredients.splice(index, 1);
+        deleteIngredient($scope.form, index);
     };
 
     $scope.addIngredient = function () {
-        $scope.form.ingredients.push({amount: "", name: ""});
+        addIngredient($scope.form);
     };
 
-}
-
-function ReadOppskriftCtrl($scope, $routeParams, Oppskrifter) {
-    $scope.oppskrift = Oppskrifter.get({id: $routeParams.id});
 }
 
 function EditOppskriftCtrl($scope, Oppskrifter, $location, $routeParams) {
@@ -57,21 +53,42 @@ function EditOppskriftCtrl($scope, Oppskrifter, $location, $routeParams) {
     };
 
     $scope.deleteStep = function (index) {
-        $scope.form.steps.splice(index, 1);
+        deleteStep($scope.form, index);
     };
 
     $scope.addStep = function () {
-        $scope.form.steps.push({});
+        addStep($scope.form);
     };
 
     $scope.deleteIngredient = function (index) {
-        $scope.form.ingredients.splice(index, 1);
+        deleteIngredient($scope.form, index);
     };
 
     $scope.addIngredient = function () {
-        $scope.form.ingredients.push({amount: "", name: ""});
+       addIngredient($scope.form);
     };
+}
 
+
+function deleteStep(oppskrift, index) {
+    oppskrift.steps.splice(index, 1);
+}
+
+function addStep(oppskrift) {
+    oppskrift.steps.push({});
+}
+
+function deleteIngredient(oppskrift, index) {
+    oppskrift.ingredients.splice(index, 1);
+}
+
+function addIngredient(oppskrift) {
+    oppskrift.ingredients.push({amount: "", name: ""});
+}
+
+
+function ReadOppskriftCtrl($scope, $routeParams, Oppskrifter) {
+    $scope.oppskrift = Oppskrifter.get({id: $routeParams.id});
 }
 
 function DeleteOppskriftCtrl($scope, Oppskrifter, $location, $routeParams) {
