@@ -4,27 +4,35 @@ var winston = require('winston');
 var MongoClient = require('mongodb').MongoClient;
 var oppskrifterDb,
     oppskrifterCollection,
-    countersCollection;
+    countersCollection,
+    userCollection;
 
 MongoClient.connect("mongodb://localhost:27017/oppskrifter", function (err, db) {
     if (!err) {
-        console.log("We are connected");
+        winston.info("Connected to MongoDB")
     }
 
     oppskrifterDb = db;
 
     db.createCollection("oppskrifter", function (err, collection) {
         if (!err) {
-            console.log("Found oppskrifter collection");
+            winston.info("Found oppskrifter collection")
         }
         oppskrifterCollection = collection;
     });
 
     db.createCollection("counters", function(err, collection){
         if (!err) {
-            console.log("Found counters collection");
+            winston.info("Found counters collection")
         }
         countersCollection = collection;
+    });
+
+    db.createCollection("users", function(err, collection){
+        if (!err) {
+            winston.info("Found users collection");
+        }
+        userCollection = collection;
     });
 
 });
@@ -40,27 +48,40 @@ function getNextGlobalId(callback){
     return getNextSequence("global",callback);
 }
 
+exports.addUser = function(userInfo, callback){
+    getNextGlobalId(function(seq){
+        userInfo._id = seq;
+        userCollection.insert(userInfo, function(err, dbUser){
+            if(err){
+                winston.error("Could not create user " + userInfo.email);
+                callback(false, null);
+                return;
+            }
+            callback(true,dbUser);
+        });
+    });
+};
 
 exports.addOppskrift = function (oppskrift, callback) {
     getNextGlobalId(function(seq){
         oppskrift._id  = seq;
-        oppskrifterCollection.insert(  oppskrift, function(err, doc){
+        oppskrifterCollection.insert(  oppskrift, function(err, dbOppskrift){
             if(err){
-                console.log(err);
+                winston.error("Could not create oppskrift " + oppskrift._id);
                 callback(false, null);
                 return;
             }
-            callback(true, doc);
+            callback(true, dbOppskrift);
         });
     });
 };
 
 exports.getOppskrift = function (idToFind, callback) {
-    oppskrifterCollection.findOne({_id : parseInt(idToFind)}, function(err, doc){
+    oppskrifterCollection.findOne({_id : parseInt(idToFind)}, function(err, dbOppskrift){
         if(err){
-           console.log(err);
+           winston.error(err);
         }
-        callback(doc);
+        callback(dbOppskrift);
     });
 };
 
@@ -68,7 +89,7 @@ exports.deleteOppskrift = function (id, callback) {
     winston.debug("db.deletePost:: Looking for oppskrift " + id);
     oppskrifterCollection.remove( {_id : parseInt(id)}, function(err, numRemoved){
         if(err){
-            console.log(err);
+            winston.error(err);
             callback(false);
             return;
         }
@@ -78,13 +99,13 @@ exports.deleteOppskrift = function (id, callback) {
 };
 
 exports.updateOppskrift = function (oppskrift, callback) {
-    oppskrifterCollection.save(oppskrift, {safe:true}, function (err, doc){
+    oppskrifterCollection.save(oppskrift, {safe:true}, function (err, numUpdatet){
         if(err){
             console.log(err);
             callback(false);
             return;
         }
-        if(doc === 1){
+        if(numUpdatet === 1){
             //update
             callback(true);
             return;
@@ -95,8 +116,8 @@ exports.updateOppskrift = function (oppskrift, callback) {
 
 exports.getAllOppskrifter = function (callback) {
     var oppskrifter = [];
-    oppskrifterCollection.find({}).toArray(function (err, results) {
-        results.forEach(function (item) {
+    oppskrifterCollection.find({}).toArray(function (err, dbOppskrifter) {
+        dbOppskrifter.forEach(function (item) {
             oppskrifter.push(item);
         });
         callback(oppskrifter);

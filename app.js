@@ -14,7 +14,7 @@ var app = module.exports = express();
 
 winston.remove(winston.transports.Console);
 //winston.add(winston.transports.Console, { level : "error"  });
-winston.add(winston.transports.Console, { level : "debug"  });
+winston.add(winston.transports.Console, { level : "info"  });
 
 app.configure(function () {
   app.set('views', __dirname + '/views');
