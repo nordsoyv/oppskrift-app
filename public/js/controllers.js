@@ -2,8 +2,32 @@
 
 /* Controllers */
 
-function MainCtrl($scope){
-    $scope.user = {email : "test@test.com"};
+function MainCtrl($scope) {
+//    $scope.user = {email : "test@test.com"};
+    $scope.loginInfo = {loggedIn: false};
+
+    $scope.$on("loginEvent", function (event, args) {
+        $scope.loginInfo.user = args.user;
+        $scope.loginInfo.loggedIn = true;
+    });
+
+    $scope.$on("logoutEvent", function (event, args) {
+        $scope.loginInfo.user = null;
+        $scope.loginInfo.loggedIn = false;
+    });
+}
+
+function LoginCtrl($scope) {
+    $scope.form = {};
+
+    $scope.login = function () {
+        var loginInfo = { user: $scope.form.email };
+        $scope.$emit("loginEvent", loginInfo);
+    };
+
+    $scope.logout = function () {
+        $scope.$emit("logoutEvent", {});
+    };
 }
 
 
@@ -26,7 +50,7 @@ function AddOppskriftCtrl($scope, Oppskrifter, $location) {
         newOppskrift.title = $scope.form.title;
         newOppskrift.steps = $scope.form.steps;
         newOppskrift.ingredients = $scope.form.ingredients;
-        newOppskrift.$save(function(savedOppskrift, putResponseHeaders){
+        newOppskrift.$save(function (savedOppskrift, putResponseHeaders) {
             $location.path('/readOppskrift/' + savedOppskrift[0]._id);
         });
 
@@ -71,7 +95,7 @@ function EditOppskriftCtrl($scope, Oppskrifter, $location, $routeParams) {
     };
 
     $scope.addIngredient = function () {
-       addIngredient($scope.form);
+        addIngredient($scope.form);
     };
 }
 

@@ -2,13 +2,27 @@ extends layout
 
 block body
   div(class="container" ,ng-app="OppskriftApp", ng-controller="MainCtrl")
-    h2 Oppskrifts database
-    ul
-      li
-        a(href='/') Hovedsiden
-      li
-        a(href='/addOppskrift') Legg til en ny oppskrift
-        
+    .row
+        .span6
+            h2 Oppskrifts database
+            ul
+              li
+                a(href='/') Hovedsiden
+              li
+                a(href='/addOppskrift') Legg til en ny oppskrift
+        .span2.offset4
+            div(ng-controller="LoginCtrl")
+                div(ng-switch on="loginInfo.loggedIn")
+                    div(ng-switch-when="false")
+                        label(for='loginName') Brukernavn:
+                        input(ng-model="form.email" , name="loginName")
+                        label(for='password') Passord:
+                        input(type='password', ng-model="form.password" , name="password")
+                        button.btn(ng-click='login()') Login
+                    div(ng-switch-when="true")
+                        h6 {{loginInfo.user}}
+                        button.btn(ng-click="logout()") Logout
+
     div(ng-view)
     
   script(src='js/lib/angular/angular.js')
