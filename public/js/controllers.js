@@ -2,6 +2,10 @@
 
 /* Controllers */
 
+function MainCtrl($scope){
+    $scope.user = {email : "test@test.com"};
+}
+
 
 function IndexCtrl($scope, Oppskrifter) {
     $scope.oppskrifter = Oppskrifter.query();
