@@ -12,12 +12,13 @@ block body
                 a(href='/addOppskrift') Legg til en ny oppskrift
         div(ng-controller="LoginCtrl", class="login-wrapper")
             div(ng-switch on="loginInfo.loggedIn")
-                div(ng-switch-when="false", class="span4 offset2")
+                div(ng-switch-when="false", class="span5 offset1")
                     label(for='loginName') Brukernavn:
                     input(ng-model="form.email" , name="loginName")
                     label(for='password') Passord:
                     input(type='password', ng-model="form.password" , name="password")
                     button.btn(ng-click='login()') Login
+                    a(href='#', ng-click='createUser()') Ny bruker?
                 div(ng-switch-when="true", class="span3 offset3")
                     label Logget inn som : {{loginInfo.user}}
                     button.btn(ng-click="logout()") Logout

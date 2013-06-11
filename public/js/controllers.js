@@ -17,7 +17,24 @@ function MainCtrl($scope) {
     });
 }
 
-function LoginCtrl($scope) {
+function LoginCtrl($scope, $dialog) {
+    var t = '<div class="modal-header">'+
+        '<h1>This is the title</h1>'+
+        '</div>'+
+        '<div class="modal-body">'+
+        '<p>Enter a value to pass to <code>close</code> as the result: <input ng-model="result" /></p>'+
+        '</div>'+
+        '<div class="modal-footer">'+
+        '<button ng-click="close(result)" class="btn btn-primary" >Close</button>'+
+        '</div>';
+
+    var opts = {
+        backdrop: true,
+        keyboard: true,
+        backdropClick: true,
+        templateUrl:  '/templates/dialog/createUser.html', // OR: templateUrl: 'path/to/view.html',
+        controller: 'LoginDialogController'
+    };
     $scope.form = {};
 
     $scope.login = function () {
@@ -27,6 +44,21 @@ function LoginCtrl($scope) {
 
     $scope.logout = function () {
         $scope.$emit("logoutEvent", {});
+    };
+
+    $scope.createUser = function(){
+        var d = $dialog.dialog(opts);
+        d.open().then(function(result){
+            if(result)
+                alert("dialog closed " + result);
+        });
+
+    };
+}
+
+function LoginDialogController($scope, dialog){
+    $scope.close = function(result){
+        dialog.close(result);
     };
 }
 
