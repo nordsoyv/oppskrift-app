@@ -22,10 +22,25 @@ MongoClient.connect("mongodb://localhost:27017/oppskrifter", function (err, db) 
     });
 
     db.createCollection("counters", function(err, collection){
+        function checkGlobalSequnceExists(collection) {
+            collection.findOne({_id : "global"}, function(err, globalSeq){
+                if(globalSeq == null){
+                    winston.info("Global sequence missing");
+                    var seq = { _id:"global", seq : 1  };
+                    collection.insert(seq, function(err,seqObj){
+                        if(!err){
+                            winston.info("Global sequence created");
+                        }
+                    });
+                }
+            });
+        }
         if (!err) {
             winston.info("Found counters collection")
         }
         countersCollection = collection;
+
+        checkGlobalSequnceExists(countersCollection);
     });
 
     db.createCollection("users", function(err, collection){
