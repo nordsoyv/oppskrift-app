@@ -18,21 +18,11 @@ function MainCtrl($scope) {
 }
 
 function LoginCtrl($scope, $dialog) {
-    var t = '<div class="modal-header">'+
-        '<h1>This is the title</h1>'+
-        '</div>'+
-        '<div class="modal-body">'+
-        '<p>Enter a value to pass to <code>close</code> as the result: <input ng-model="result" /></p>'+
-        '</div>'+
-        '<div class="modal-footer">'+
-        '<button ng-click="close(result)" class="btn btn-primary" >Close</button>'+
-        '</div>';
-
     var opts = {
         backdrop: true,
         keyboard: true,
-        backdropClick: true,
-        templateUrl:  '/templates/dialog/createUser.html', // OR: templateUrl: 'path/to/view.html',
+        backdropClick: false,
+        templateUrl:  '/templates/dialog/createUser.html',
         controller: 'LoginDialogController'
     };
     $scope.form = {};
@@ -69,9 +59,6 @@ function LoginDialogController($scope, dialog){
         }else {
             dialog.close({ loggedIn:false, email :""} );
         }
-
-
-
     };
 }
 
