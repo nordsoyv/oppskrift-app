@@ -1,11 +1,14 @@
 <div class="modal-header">
-<h1>This is the title from a template</h1>
+    <h1>This is the title from a template</h1>
 </div>
 <div class="modal-body">
-<p>Enter a value to pass to <code>close</code> as the result: <input ng-model="result" /></p>
+    <label name="email">Epost:</label><input type="email" name="email" ng-model="form.email" placeholder="Epost" />
+    <label name="password">Passord:</label><input type="password" name="password" ng-model="form.password" placeholder="Passord" />
+    <label name="passwordRepeat">Gjenta passord:</label><input type="password" name="passwordRepeat" ng-model="form.passwordRepeat" placeholder="Gjenta passord" />
+    <span>{{form.error}}</span>
 </div>
 <div class="modal-footer">
-<button ng-click="close(result)" class="btn btn-primary" >Close</button>
+    <button ng-click="register(true)" class="btn btn-primary" >Registrer</button>
 </div>
 
 

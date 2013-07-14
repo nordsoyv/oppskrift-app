@@ -49,16 +49,29 @@ function LoginCtrl($scope, $dialog) {
     $scope.createUser = function(){
         var d = $dialog.dialog(opts);
         d.open().then(function(result){
-            if(result)
-                alert("dialog closed " + result);
+            if(result.loggedIn){
+                var loginInfo = { user: result.email };
+                $scope.$emit("loginEvent", loginInfo);
+            }
         });
 
     };
 }
 
 function LoginDialogController($scope, dialog){
-    $scope.close = function(result){
-        dialog.close(result);
+    $scope.register = function(register){
+        if(register){
+            if($scope.form.password !== $scope.form.passwordRepeat){
+                $scope.form.error = "Passord må matche";
+                return;
+            }
+            dialog.close({loggedIn:true, email : $scope.form.email} );
+        }else {
+            dialog.close({ loggedIn:false, email :""} );
+        }
+
+
+
     };
 }
 
