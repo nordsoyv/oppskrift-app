@@ -1,0 +1,6 @@
+legg til bruker i database
+login sjekker mot database
+refaktorer databasekode, slik at uthenting osv gjøres av samme kode. Tar collection + objekt f.eks
+refaktorer av database kode til å bruke promise
+legg til bruker i oppskrifter
+gjør at man kun kan redigere sine egen oppskrifter
