@@ -1,0 +1,62 @@
+<h2>Legg inn en ny oppskrift</h2>
+<div class="row">
+    <div class="span2"><label for="title">Navn:</label></div>
+    <div class="span4"><input ng-model="form.title" id="title" type="text" /> </div>
+</div>
+<div class="row">
+    <div class="span2"><label for="description">Beskrivelse:</label></div>
+    <div class="span4"><input ng-model="form.description" id="description"  /> </div>
+</div>
+<div class="row">
+    <div class="span8"><h4>Fremgangsmåte:</h4></div>
+    <div class="span1"><h4>Mengde:</h4></div>
+    <div class="span2"><h4>Navn:</h4></div>
+</div>
+<div class="row">
+    <div class="span8">
+        <div ng-repeat='step in form.steps'>
+            <div class="row">
+                <div class="span7">
+                    <textarea class="stepinput" ng-model="step.text"></textarea>
+                    <button  class="fui-cross-16 btn" ng-click="deleteStep($index)" ></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span2">
+                <button class="btn" ng-click='addStep()'>Nytt steg</button>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div ng-repeat='ingredient in form.ingredients'>
+            <div class="row ingredient">
+                <div class="span1">
+                    <input class="amount" ng-model="ingredient.amount" type="text" />
+                </div>
+                <div class="span2">
+                    <input class="name" ng-model="ingredient.name" type="text" />
+                </div>
+                <div class="span1">
+                    <button class="fui-cross-16 btn" ng-click="deleteIngredient($index)"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="span2">
+                <button class="btn" ng-click='addIngredient()'>Ny ingridiens</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="span2">
+        <button class="btn" ng-click="submitPost()">Lagre oppskrift</button>
+    </div>
+</div>
+
+
+
+
