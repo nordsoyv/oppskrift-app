@@ -1,0 +1,12 @@
+<p>
+    Det finnes {{posts.length}} oppskrifter
+</p>
+<div ng-repeat='oppskrift in oppskrifter'>
+    <h3>{{oppskrift.title}}</h3>
+    <div>{{oppskrift.description}}</div>
+    <a href='readOppskrift/{{oppskrift._id}}'  >Detaljer</a>
+    | -
+    <a href='editOppskrift/{{oppskrift._id}}'  >Rediger</a>
+    | -
+    <a href='deleteOppskrift/{{oppskrift._id}}'  >Slett</a>
+</div>

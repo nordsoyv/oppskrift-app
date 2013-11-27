@@ -1,0 +1,50 @@
+<html ng-app="OppskriftApp">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Oppskrift App</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/flat-ui.css">
+    <link rel="stylesheet" href="/css/app.css">
+
+</head>
+<body>
+<div class="container" ng-app="OppskriftApp" ng-controller="MainCtrl">
+         STATIC
+    <div class="row">
+        <div class="span6"><h2>Oppskrifts database</h2>
+            <ul>
+                <li><a href="/">Hovedsiden</a></li>
+                <li><a href="/addOppskrift">Legg til en ny oppskrift</a></li>
+            </ul>
+        </div>
+        <div ng-controller="LoginCtrl" class="login-wrapper">
+            <div ng-switch on="loginInfo.loggedIn">
+                <div ng-switch-when="false" class="span5 offset1">
+                    <label for="loginName">Brukernavn:</label>
+                    <input ng-model="form.email" name="loginName">
+                    <label for="password">Passord:</label>
+                    <input type="password" ng-model="form.password" name="password">
+                    <button ng-click="login()" class="btn">Login</button>
+                    <a href="#" ng-click="createUser()">Ny bruker?</a></div>
+                <div ng-switch-when="true" class="span3 offset3"><label>Logget inn som : {{loginInfo.user}}</label>
+                    <button ng-click="logout()" class="btn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-view></div>
+
+</div>
+
+<script src="js/lib/angular/angular.js"></script>
+<script src="js/lib/angular/angular-resource.js"></script>
+<script src="js/lib/angular-ui/ui-bootstrap-0.3.0.js"></script>
+<script src="js/lib/angular-ui/ui-bootstrap-tpls-0.3.0.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/directives.js"></script>
+</body>
+</html>
