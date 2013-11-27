@@ -22,7 +22,7 @@ function LoginCtrl($scope, $dialog) {
         backdrop: true,
         keyboard: true,
         backdropClick: false,
-        templateUrl:  '/templates/dialog/createUser.html',
+        templateUrl:  '/html/dialog/createUser.html',
         controller: 'LoginDialogController'
     };
     $scope.form = {};
