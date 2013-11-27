@@ -49,6 +49,10 @@ function LoginCtrl($scope, $dialog) {
 }
 
 function LoginDialogController($scope, dialog){
+    $scope.closeDialog = function(){
+        dialog.close({ loggedIn:false, email :""});
+    }
+
     $scope.register = function(register){
         if(register){
             if($scope.form.password !== $scope.form.passwordRepeat){
