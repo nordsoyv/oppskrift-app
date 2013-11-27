@@ -1,9 +1,0 @@
-p Det finnes {{posts.length}} oppskrifter
-div(ng-repeat='oppskrift in oppskrifter')
-  h3 {{oppskrift.title}}
-  div {{oppskrift.description}}
-  a(href='readOppskrift/{{oppskrift._id}}') Detaljer
-  |  - 
-  a(href='editOppskrift/{{oppskrift._id}}') Rediger
-  |  - 
-  a(href='deleteOppskrift/{{oppskrift._id}}') Slett
