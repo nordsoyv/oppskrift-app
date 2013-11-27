@@ -16,10 +16,6 @@ winston.remove(winston.transports.Console);
 winston.add(winston.transports.Console, { level: "info"  });
 
 app.configure(function () {
-//    app.set('views', __dirname + '/views');
-//    app.set('view engine', 'html');
-//    app.set("view options", {layout: false});
-//    app.engine('html', engines.ejs);
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.static(__dirname + '/public'));

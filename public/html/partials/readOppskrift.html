@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="span4"><h2>{{oppskrift.title}}  STATIC</h2></div>
+</div>
+<br>
+<div class="row">
+    <div class="span4"><h4>Beskrivelse</h4></div>
+</div>
+<div class="row">
+    <div class="span4"><p>{{oppskrift.description}}</p></div>
+</div>
+<br>
+<div class="row">
+    <div class="span4"><h4>Ingridienser</h4></div>
+</div>
+<ul>
+    <li ng-repeat="ingredient in oppskrift.ingredients">
+        <p>{{ingredient.amount}} {{ingredient.name}}</p>
+    </li>
+</ul>
+<div class="row">
+    <div class="span4"><h4>Fremgangsmåte</h4></div>
+</div>
+<ol>
+    <li ng-repeat="step in oppskrift.steps">
+        <p>{{step.text}}</p>
+    </li>
+</ol>
