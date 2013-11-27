@@ -17,14 +17,14 @@
                 <li><a href="/addOppskrift">Legg til en ny oppskrift</a></li>
             </ul>
         </div>
-        <div ng-controller="LoginCtrl" class="login-wrapper">
-            <div ng-switch on="loginInfo.loggedIn">
+        <div ng-controller="LoginCtrl" class="form-inline">
+            <div ng-switch on="loginInfo.loggedIn" >
                 <div ng-switch-when="false" class="span5 offset1">
-                    <label for="loginName">Brukernavn:</label>
-                    <input ng-model="form.email" name="loginName">
-                    <label for="password">Passord:</label>
-                    <input type="password" ng-model="form.password" name="password">
-                    <button ng-click="login()" class="btn">Login</button>
+                    <!--<label for="loginName">Brukernavn:</label>-->
+                    <input ng-model="form.email" name="loginName" class="input-small" placeholder="Epost">
+                    <!--<label for="password">Passord:</label>-->
+                    <input type="password" ng-model="form.password" name="password" class="input-small" placeholder="Passord">
+                    <button ng-click="login()" class="btn btn-small">Login</button>
                     <a href="#" ng-click="createUser()">Ny bruker?</a></div>
                 <div ng-switch-when="true" class="span3 offset3"><label>Logget inn som : {{loginInfo.user}}</label>
                     <button ng-click="logout()" class="btn">Logout</button>
