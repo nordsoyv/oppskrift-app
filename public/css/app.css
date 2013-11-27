@@ -1,32 +1,5 @@
 /* app css stylesheet */
 
-.login-wrapper label{
-    font-size: 10px;
-    width: 50px;
-    display: inline;
-    margin-right: 3px;
-}
-
-.login-wrapper input{
-    font-size: 10px;
-    width: 50px;
-    display: inline;
-    height: 20px;
-    margin-right: 3px;
-}
-
-
-.login-wrapper input[type=password]{
-    font-size: 10px;
-    width: 50px;
-    display: inline;
-    height: 10px;
-    margin-top: 10px;
-}
-
-.login-wrapper .btn {
-    font-size: 10px;
-}
 
 .stepinput {
     width: 80%;

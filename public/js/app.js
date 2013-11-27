@@ -2,7 +2,7 @@
 /*global angular, IndexCtrl,AddPostCtrl,ReadPostCtrl ,EditPostCtrl, DeletePostCtrl, $resource*/
 
 // Declare app level module which depends on filters, and services
-angular.module('OppskriftApp', ['OppskriftApp.filters', 'OppskriftApp.services', 'OppskriftApp.directives']).
+angular.module('OppskriftApp', ['OppskriftApp.filters', 'OppskriftApp.services', 'OppskriftApp.directives', 'ngRoute']).
   config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {
