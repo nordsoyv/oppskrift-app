@@ -91,7 +91,7 @@ function AddOppskriftCtrl($scope, Oppskrifter, $location) {
         newOppskrift.steps = $scope.form.steps;
         newOppskrift.ingredients = $scope.form.ingredients;
         newOppskrift.$save(function (savedOppskrift, putResponseHeaders) {
-            $location.path('/readOppskrift/' + savedOppskrift[0]._id);
+            $location.path('/readOppskrift/' + savedOppskrift._id);
         });
 
     };

@@ -29,7 +29,7 @@ exports.getOppskrift = function (req, res) {
 exports.addOppskrift = function (req, res) {
     db.addOppskrift(req.body, function (success, oppskrift) {
         if (success)
-            res.json(oppskrift);
+            res.json(oppskrift[0]);
         else
             res.json(false);
 

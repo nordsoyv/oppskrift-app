@@ -18,7 +18,7 @@ angular.module('OppskriftApp', ['OppskriftApp.filters', 'OppskriftApp.services',
         controller: ReadOppskriftCtrl
       }).
       when('/editOppskrift/:id', {
-        templateUrl: 'partials/editOppskrift',
+        templateUrl: 'partials/updateOppskrift',
         controller: EditOppskriftCtrl
       }).
       when('/deleteOppskrift/:id', {
