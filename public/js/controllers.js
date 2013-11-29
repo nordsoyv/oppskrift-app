@@ -55,6 +55,10 @@ function LoginDialogController($scope, dialog){
 
     $scope.register = function(register){
         if(register){
+            if(typeof $scope.form.email != "string" ){
+                $scope.form.error = "Epostadresse påkrevd";
+                return;
+            }
             if($scope.form.password !== $scope.form.passwordRepeat){
                 $scope.form.error = "Passord må matche";
                 return;

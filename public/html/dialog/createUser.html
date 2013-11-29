@@ -1,14 +1,23 @@
 <div class="modal-header">
     <h1>Registrer ny bruker</h1>
 </div>
-<div class="modal-body">
-    <label name="email">Epost:</label><input type="email" name="email" ng-model="form.email" placeholder="Epost" />
-    <label name="password">Passord:</label><input type="password" name="password" ng-model="form.password" placeholder="Passord" />
-    <label name="passwordRepeat">Gjenta passord:</label><input type="password" name="passwordRepeat" ng-model="form.passwordRepeat" placeholder="Gjenta passord" />
-    <span>{{form.error}}</span>
-</div>
-<div class="modal-footer">
-    <button ng-click="closeDialog()" class="btn" >Cancel</button>
-    <button ng-click="register(true)" class="btn btn-primary" >Registrer</button>
-</div>
-
+<form name="form" novalidate>
+    <div class="modal-body">
+        <label name="email">Epost:</label>
+        <input type="email" name="email" ng-model="form.email" placeholder="Epost" required />
+        <span ng-show="form.email.$error.required" class="help-inline" style="color: red">*</span>
+        <span ng-show="form.email.$error.email">Ikke en gyldig epostadresse</span>
+        <label name="password">Passord:</label>
+        <input type="password" name="password" ng-model="form.password" placeholder="Passord" required />
+        <span ng-show="form.password.$error.required" class="help-inline" style="color: red">*</span>
+        <label name="passwordRepeat">Gjenta passord:</label>
+        <input type="password" name="passwordRepeat" ng-model="form.passwordRepeat" placeholder="Gjenta passord" required />
+        <span ng-show="form.passwordRepeat.$error.required" class="help-inline" style="color: red">*</span>
+        <br>
+        <span style="color: red">{{form.error}}</span>
+    </div>
+    <div class="modal-footer">
+        <button ng-click="closeDialog()" class="btn">Cancel</button>
+        <button ng-click="register(true)" class="btn btn-primary">Registrer</button>
+    </div>
+</form>
